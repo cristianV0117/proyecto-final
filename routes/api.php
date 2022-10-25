@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Users\{
+    IndexController,
+    ShowController,
+    StoreController
+};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/', function () {
+   return response("PROYECTO FINAL API");
 });
+
+Route::get('/users', IndexController::class);
+Route::get('/users/{id}', ShowController::class);
+Route::post('/users', StoreController::class);

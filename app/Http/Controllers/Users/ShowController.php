@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
-final class IndexController extends Controller
+final class ShowController extends Controller
 {
     /**
      * @param User $user
@@ -16,13 +16,15 @@ final class IndexController extends Controller
     }
 
     /**
+     * @param int $id
      * @return JsonResponse
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(int $id): JsonResponse
     {
+        $user = $this->user->find($id);
         return response()->json([
-                "error" => false,
-                "data" => $this->user->all() ?? "No hay usuarios"
+            "error" => !$user,
+            "data" => $user ? $user->toArray() : "No hay usuarios"
         ], 200);
     }
 }
