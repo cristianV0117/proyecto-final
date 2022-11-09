@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Login\LogOutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users\{
     IndexController,
@@ -24,3 +26,6 @@ Route::get('/', function () {
 Route::get('/users', IndexController::class);
 Route::get('/users/{id}', ShowController::class);
 Route::post('/users', StoreController::class);
+
+Route::post('/login', LoginController::class);
+Route::get('/logout/{id}', LogOutController::class);

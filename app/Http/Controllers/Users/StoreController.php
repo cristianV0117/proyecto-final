@@ -23,9 +23,13 @@ final class StoreController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
+        $password = password_hash($request->password, PASSWORD_DEFAULT);
+        $request->request->remove('password');
+
         $data = [
             'status' => true,
             'created_at' => Carbon::now(),
+            'password' => $password,
             ...$request->all()
         ];
 

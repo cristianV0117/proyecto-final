@@ -21,7 +21,12 @@ final class User extends Authenticatable
         'phone',
         'country_id',
         'status',
-        'created_at'
+        'created_at',
+        'password'
+    ];
+
+    protected $hidden = [
+        'password'
     ];
 
     /**
