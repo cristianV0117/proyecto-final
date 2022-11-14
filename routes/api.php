@@ -8,6 +8,8 @@ use App\Http\Controllers\Users\{
     ShowController,
     StoreController
 };
+use App\Http\Controllers\Login\GetAllLoginLogOutHistoriesController;
+use App\Http\Controllers\Books\IndexController as BookIndexController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,5 +29,9 @@ Route::get('/users', IndexController::class);
 Route::get('/users/{id}', ShowController::class);
 Route::post('/users', StoreController::class);
 
+Route::get('/books', BookIndexController::class);
+
 Route::post('/login', LoginController::class);
 Route::get('/logout/{id}', LogOutController::class);
+
+Route::get('/login-log-out-histories', GetAllLoginLogOutHistoriesController::class);

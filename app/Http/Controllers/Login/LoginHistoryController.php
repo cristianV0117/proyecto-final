@@ -5,19 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
-use App\Models\LoginLogOutHistory;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 final class LoginHistoryController extends Controller
 {
     private const LOGIN = 'Ingreso a la plataforma';
-
-    /**
-     * @param LoginLogOutHistory $loginLogOutHistory
-     */
-    public function __construct(private LoginLogOutHistory $loginLogOutHistory)
-    {
-    }
 
     /**
      * @param int $userId
@@ -25,10 +17,9 @@ final class LoginHistoryController extends Controller
      */
     public function __invoke(int $userId): void
     {
-        $this->loginLogOutHistory->create([
-            "type" => self::LOGIN,
-            "user_id" => $userId,
-            "created_at" => Carbon::now()
+        DB::select('CALL save_login_log_out_history(?,?)', [
+            $userId,
+            self::LOGIN
         ]);
     }
 }
